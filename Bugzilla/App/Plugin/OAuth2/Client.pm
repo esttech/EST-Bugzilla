@@ -19,6 +19,7 @@ use Mojo::Parameters;
 use Mojo::URL;
 use Try::Tiny;
 
+my $tempvar = "set";
 sub register {
   my ($self, $app) = @_;
 
@@ -57,7 +58,9 @@ sub register {
         client_secret => $params->{oauth2_client_secret},
         code          => scalar($c->param('code')),
         grant_type    => 'authorization_code',
-        redirect_uri  => Bugzilla->localconfig->urlbase,
+	redirect_uri  => $tempvar, 
+
+	#redirect_uri  => Bugzilla->localconfig->urlbase,
       };
 
       my $token_url = Mojo::URL->new($params->{oauth2_client_token_url});
@@ -101,6 +104,7 @@ sub register {
   $app->helper(
     'oauth2.redirect_uri' => sub {
       my ($c, $redirect) = @_;
+      $tempvar = Bugzilla->localconfig->urlbase . 'oauth2.cgi?redirect=' . $redirect;
       return Bugzilla->localconfig->urlbase . 'oauth2.cgi?redirect=' . $redirect;
     }
   );

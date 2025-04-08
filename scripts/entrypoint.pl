@@ -103,8 +103,8 @@ sub cmd_jobqueue {
 sub cmd_dev_httpd {
   assert_database->get();
 
-  run_quiet('perl', 'checksetup.pl', '--no-template', $ENV{BZ_ANSWERS_FILE});
-  run_quiet(
+  run('perl', 'checksetup.pl', '--no-template', $ENV{BZ_ANSWERS_FILE});
+  run(
     'perl', 'scripts/generate_bmo_data.pl',
     '--param' => 'use_mailer_queue=0',
     'admin@mozilla.bugs'

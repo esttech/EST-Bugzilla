@@ -243,25 +243,8 @@ foreach my $user (@users) {
 ##########################################################################
 my @classifications = (
   {
-    name        => "Client Software",
-    description => "End User Products developed by mozilla.org contributors"
-  },
-  {
-    name        => "Components",
-    description => "Standalone components that can be used by other products. "
-      . "Core, Directory, NSPR, NSS and Toolkit are used by Gecko "
-      . "(which is in turn used by Firefox, Thunderbird, SeaMonkey, "
-      . "Fennec, and others)",
-  },
-  {
-    name        => "Server Software",
-    description => "Web Server software developed by mozilla.org contributors "
-      . "to aid the development of mozilla.org products"
-  },
-  {
-    name => "Other",
-    description =>
-      "Everything else - websites, Labs, important things which aren't code"
+    name        => "ELIN Software",
+    description => "ELIN stuff"
   },
   {name => "Graveyard", description => "Old, retired products"},
 );
@@ -280,31 +263,29 @@ for my $class (@classifications) {
 ##########################################################################
 my @products = (
   {
-    classification => 'Client Software',
-    product_name   => 'Firefox',
-    description    => 'For bugs in Firefox Desktop, the Mozilla Foundations '
-      . 'web browser. For Firefox user interface issues in '
-      . 'menus, developer tools, bookmarks, location bar, and '
-      . 'preferences. Many Firefox bugs will either be filed '
-      . 'here or in the <a href="https://bugzilla.mozilla.org/describecomponents.cgi?product=Core">Core</a> product.'
-      . '(<a href="https://wiki.mozilla.org/Modules/All#Firefox">more info</a>)',
+    classification => 'ELIN Software',
+    product_name   => 'ELIN',
+    description    => 'For bugs in ELIN '
+      . ', which will never happen '
+      . 'here or in the <a href="https://www.est.tech">EST</a> product.'
+      . '(<a href="https://www.est.tech">more info</a>)',
     versions =>
       ['34 Branch', '35 Branch', '36 Branch', '37 Branch', 'Trunk', 'unspecified'],
     default_version  => 'unspecified',
     milestones => [
-      'Firefox 36',
+      'ELIN 36',
       '---',
-      'Firefox 37',
-      'Firefox 38',
-      'Firefox 39',
+      'ELIN 37',
+      'ELIN 38',
+      'ELIN 39',
       '111 Branch',
       'Future'
     ],
     defaultmilestone => '---',
     components       => [{
       name        => 'General',
-      description => 'For bugs in Firefox which do not fit into '
-        . 'other more specific Firefox components',
+      description => 'For bugs in ELIN which do not fit into '
+        . 'other more specific ELIN components',
       initialowner   => 'nobody@mozilla.org',
       initialqaowner => '',
       initial_cc     => [],
@@ -314,35 +295,13 @@ my @products = (
     },
     {
       name        => 'Installer',
-      description => 'Bugs and feature requests for the Firefox application install wizard.',
+      description => 'Bugs and feature requests for the ELIN install .',
       initialowner   => 'nobody@mozilla.org',
       initialqaowner => '',
       initial_cc     => [],
       watch_user     => 'general@firefox.bugs',
       team_name      => 'Mozilla',
       triage_owner   => 'nobody@mozilla.org',
-    }],
-  },
-  {
-    classification => 'Other',
-    product_name   => 'bugzilla.mozilla.org',
-    description    => 'For issues relating to the bugzilla.mozilla.org website, '
-      . 'also known as <a href="https://wiki.mozilla.org/BMO">BMO</a>.',
-    versions         => ['Development/Staging', 'Production'],
-    default_version  => 'Production',
-    milestones       => ['---'],
-    defaultmilestone => '---',
-    components       => [{
-      name => 'General',
-      description =>
-        'This is the component for issues specific to bugzilla.mozilla.org '
-        . 'that do not belong in other components.',
-      initialowner   => 'nobody@mozilla.org',
-      initialqaowner => '',
-      initial_cc     => [],
-      watch_user     => 'general@bugzilla.bugs',
-      team_name      => 'Mozilla',
-      triage_owner   => 'admin@mozilla.bugs',
     }],
   },
 );
@@ -648,8 +607,8 @@ my %set_params = (
   usebugaliases                  => 1,
   useqacontact                   => 1,
   use_mailer_queue               => 1,
-  user_info_class                => 'GitHubAuth,OAuth2,CGI',
-  user_verify_class              => 'GitHubAuth,DB',
+  user_info_class                => 'OAuth2,CGI',
+  user_verify_class              => 'DB',
   %opt_param,
 );
 
@@ -700,7 +659,7 @@ qe-verify: - ➜ the bug will not/can not be verified manually',
     grant_group      => '',
     target_type      => 'b',
     cc_list          => '',
-    inclusions       => ['Firefox:']
+    inclusions       => ['']
   },
 );
 
@@ -936,84 +895,14 @@ foreach my $kw (@keywords) {
 print "creating tracking flags...\n";
 my @tracking_flags = (
   {
-    name        => 'cf_status_firefox109',
-    description => 'status-firefox109',
+    name        => 'cf_status_ELIN',
+    description => 'status-felin',
     sortkey     => 0,
     type        => 'tracking',
     enter_bug   => 1,
     is_active   => 1,
     values      => ['---', '?', 'affected', 'unaffected', 'fixed', 'wontfix', 'disabled'],
-    products    => ['Firefox'],
-  },
-  {
-    name        => 'cf_status_firefox110',
-    description => 'status-firefox110',
-    sortkey     => 0,
-    type        => 'tracking',
-    enter_bug   => 1,
-    is_active   => 1,
-    values      => ['---', '?', 'affected', 'unaffected', 'fixed', 'wontfix', 'disabled'],
-    products    => ['Firefox'],
-  },
-  {
-    name        => 'cf_status_firefox111',
-    description => 'status-firefox111',
-    sortkey     => 0,
-    type        => 'tracking',
-    enter_bug   => 1,
-    is_active   => 1,
-    values      => ['---', '?', 'affected', 'unaffected', 'fixed', 'wontfix', 'disabled'],
-    products    => ['Firefox'],
-  },
-  {
-    name        => 'cf_tracking_firefox109',
-    description => 'tracking-firefox109',
-    sortkey     => 0,
-    type        => 'tracking',
-    enter_bug   => 1,
-    is_active   => 1,
-    values      => ['---', '?', '+', '-', 'blocking'],
-    products    => ['Firefox'],
-  },
-  {
-    name        => 'cf_tracking_firefox110',
-    description => 'tracking-firefox110',
-    sortkey     => 0,
-    type        => 'tracking',
-    enter_bug   => 1,
-    is_active   => 1,
-    values      => ['---', '?', '+', '-', 'blocking'],
-    products    => ['Firefox'],
-  },
-  {
-    name        => 'cf_tracking_firefox111',
-    description => 'tracking-firefox111',
-    sortkey     => 0,
-    type        => 'tracking',
-    enter_bug   => 1,
-    is_active   => 1,
-    values      => ['---', '?', '+', '-', 'blocking'],
-    products    => ['Firefox'],
-  },
-  {
-    name        => 'cf_status_thunderbird_esr91',
-    description => 'status-thunderbird_esr91',
-    sortkey     => 0,
-    type        => 'tracking',
-    enter_bug   => 1,
-    is_active   => 1,
-    values      => ['---', '?', 'affected', 'unaffected', 'fixed', 'wontfix'],
-    products    => ['Firefox'],
-  },
-  {
-    name        => 'cf_status_thunderbird_esr102',
-    description => 'status-thunderbird_esr102',
-    sortkey     => 0,
-    type        => 'tracking',
-    enter_bug   => 1,
-    is_active   => 1,
-    values      => ['---', '?', 'affected', 'unaffected', 'fixed', 'wontfix'],
-    products    => ['Firefox'],
+    products    => ['ELIN'],
   },
 );
 
