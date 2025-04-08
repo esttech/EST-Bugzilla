@@ -1,4 +1,4 @@
-FROM us-docker.pkg.dev/moz-fx-bugzilla-prod/bugzilla-prod/bmo-perl-slim:20250328 AS base
+FROM mozillabteam/bmo-perl-slim:20240822.1 AS base
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -20,6 +20,17 @@ RUN apt-get update \
     && apt-get install -y rsync curl \
     && rm -rf /var/lib/apt/lists/*
 
+# Add cloudflare gpg key
+RUN mkdir -p --mode=0755 /usr/share/keyrings \
+  && curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null 
+
+# Add this repo to your apt repositories
+RUN echo "deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main" | tee /etc/apt/sources.list.d/cloudflared.list
+
+# install cloudflared
+RUN apt-get update && apt-get install cloudflared lsof sudo
+RUN adduser app sudo
+RUN echo 'app ALL=NOPASSWD: ALL' >> /etc/sudoers
 WORKDIR /app
 
 COPY . /app
@@ -55,5 +66,13 @@ RUN curl -L https://github.com/mozilla/geckodriver/releases/download/v0.33.0/gec
   && cd /tmp \
   && tar zxvf geckodriver.tar.gz \
   && mv geckodriver /usr/bin/geckodriver
+# Add cloudflare gpg key
+RUN mkdir -p --mode=0755 /usr/share/keyrings \
+  && curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null \
 
+# Add this repo to your apt repositories
+RUN echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
+
+# install cloudflared
+RUN apt-get update && sudo apt-get install cloudflared
 USER app
