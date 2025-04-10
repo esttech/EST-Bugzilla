@@ -82,5 +82,6 @@ RUN echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cl
 RUN apt-get update && sudo apt-get install cloudflared
 # install sendmail
 RUN apt install -y sendmail
-RUN echo Y | sudo sendmailconfig
+RUN echo "Y" | sendmailconfig
+RUN service sendmail start
 USER app
