@@ -34,7 +34,8 @@ RUN echo 'app ALL=NOPASSWD: ALL' >> /etc/sudoers
 
 # install sendmail
 RUN apt install -y sendmail
-RUN echo Y | sudo sendmailconfig
+RUN echo "Y" | sudo sendmailconfig
+RUN service sendmail start
 
 WORKDIR /app
 
@@ -73,7 +74,7 @@ RUN curl -L https://github.com/mozilla/geckodriver/releases/download/v0.33.0/gec
   && mv geckodriver /usr/bin/geckodriver
 # Add cloudflare gpg key
 RUN mkdir -p --mode=0755 /usr/share/keyrings \
-  && curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null \
+  && curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null
 
 # Add this repo to your apt repositories
 RUN echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
@@ -82,6 +83,6 @@ RUN echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cl
 RUN apt-get update && sudo apt-get install cloudflared
 # install sendmail
 RUN apt install -y sendmail
-RUN echo "Y" | sendmailconfig
+RUN echo "Y" | bash -x /usr/sbin/sendmailconfig
 RUN service sendmail start
 USER app
