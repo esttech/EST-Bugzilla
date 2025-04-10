@@ -31,6 +31,11 @@ RUN echo "deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cl
 RUN apt-get update && apt-get install cloudflared lsof sudo
 RUN adduser app sudo
 RUN echo 'app ALL=NOPASSWD: ALL' >> /etc/sudoers
+
+# install sendmail
+RUN apt install -y sendmail
+RUN echo Y | sudo sendmailconfig
+
 WORKDIR /app
 
 COPY . /app
@@ -75,4 +80,7 @@ RUN echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cl
 
 # install cloudflared
 RUN apt-get update && sudo apt-get install cloudflared
+# install sendmail
+RUN apt install -y sendmail
+RUN echo Y | sudo sendmailconfig
 USER app
