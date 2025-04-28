@@ -186,29 +186,6 @@ my @users = (
     realname => 'Nobody; OK to take it and work on it',
     password => '*'
   },
-  {
-    login    => 'automation@bmo.tld',
-    realname => 'BMO Automation',
-    password => '*',
-    api_key  => '4fut0aBEfW260ULXEP1pvOqj7lwnhHoSB16wfpLP'
-  },
-  {
-    login    => 'lobot@bmo.tld',
-    realname => 'Lando Automation',
-    password => 'password123456789!',
-    api_key  => 'hqPlbNFAtbGhBC7O68DfMBNE5wu7e18Ssviatizl'
-  },
-  {
-    login    => 'pulsebot@bmo.tld',
-    realname => 'Pulsebot Automation',
-    password => 'password123456789!',
-    api_key  => 'p5vddyKNyvMYpfkmQgXXrutL3Nm2xhb1kBADqF0T'
-  },
-  {
-    login    => 'github-automation@bmo.tld',
-    realname => 'BMO Github Automation',
-    password => '*',
-  },
 
   map { {login => $_, realname => (split(/@/, $_, 2))[0], password => '*',} }
     map {
