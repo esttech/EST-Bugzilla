@@ -58,7 +58,7 @@ following command instead:
     docker compose up --build bmo.test
 
 After that, you should be able to visit http://localhost:8000/ from your browser.
-You can login as admin@mozilla.bugs with the password "password012!" (without
+You can login as kraken@est.tech with the password "password012!" (without
 quotes).
 
 If you want to update the code running in the web container, you do not need to restart everything.

@@ -26,7 +26,7 @@ Returns a list of your currently configured webhooks.
     "webhooks": [
       {
         "component": "General",
-        "creator": "admin@mozilla.bugs",
+        "creator": "kraken@est.tech",
         "enabled": true,
         "errors": 0,
         "event": "create,change,attachment,comment",

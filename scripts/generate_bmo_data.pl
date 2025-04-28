@@ -71,7 +71,7 @@ my %user_prefs = (
 my %opt_param;
 GetOptions('user-pref=s%' => \%user_prefs, 'param=s' => \%opt_param);
 
-my $admin_email = shift || 'admin@mozilla.bugs';
+my $admin_email = shift || 'kraken@est.tech';
 Bugzilla->set_user(Bugzilla::User->check({name => $admin_email}));
 
 foreach my $pref (keys %user_prefs) {
@@ -291,7 +291,7 @@ my @products = (
       initial_cc     => [],
       watch_user     => 'general@firefox.bugs',
       team_name      => 'Mozilla',
-      triage_owner   => 'admin@mozilla.bugs',
+      triage_owner   => 'kraken@est.tech',
     },
     {
       name        => 'Installer',

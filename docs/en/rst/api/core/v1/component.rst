@@ -38,7 +38,7 @@ Named parameters must be used instead of path based parameters.
      "is_active": true,
      "name": "General",
      "team_name": "Mozilla",
-     "triage_owner": "admin@mozilla.bugs"
+     "triage_owner": "kraken@est.tech"
    }
 
 .. _rest_component_object:
@@ -78,7 +78,7 @@ To create a new component called ``TestComponent`` under the ``Firefox`` product
   {
     "name" : "TestComponent",
     "description" : "This is a new test component",
-    "default_assignee" : "admin@mozilla.bugs",
+    "default_assignee" : "kraken@est.tech",
     "team_name" : "Mozilla"
   }
 
@@ -102,7 +102,7 @@ bug_description_template  string  The string included in the comment field of a 
 .. code-block:: js
 
    {
-     "default_assignee": "admin@mozilla.bugs",
+     "default_assignee": "kraken@est.tech",
      "default_bug_type": "--",
      "default_qa_contact": "",
      "description": "This is a new test component",
@@ -140,7 +140,7 @@ The body of the request should look similar to below.
 .. code-block:: js
 
    {
-     "default_assignee" : "admin@mozilla.bugs",
+     "default_assignee" : "kraken@est.tech",
      "triage_owner" : "nobody@mozilla.org"
    }
 
@@ -167,7 +167,7 @@ bug_description_template  string   The string included in the comment field of a
 .. code-block:: js
 
    {
-     "default_assignee": "admin@mozilla.bugs",
+     "default_assignee": "kraken@est.tech",
      "default_bug_type": "--",
      "default_qa_contact": "",
      "description": "For bugs in Firefox which do not fit into other more specific Firefox components",

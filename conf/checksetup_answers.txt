@@ -1,4 +1,4 @@
-$answer{'ADMIN_EMAIL'}          = 'admin@mozilla.bugs';
+$answer{'ADMIN_EMAIL'}          = 'kraken@est.tech';
 $answer{'ADMIN_OK'}             = 'Y';
 $answer{'ADMIN_PASSWORD'}       = 'password012!';
 $answer{'ADMIN_REALNAME'}       = 'Admin User';

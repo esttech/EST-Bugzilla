@@ -107,7 +107,7 @@ sub cmd_dev_httpd {
   run(
     'perl', 'scripts/generate_bmo_data.pl',
     '--param' => 'use_mailer_queue=0',
-    'admin@mozilla.bugs'
+    'kraken@est.tech'
   );
 
   my $httpd_exit_f = run_cereal_and_httpd('-DACCESS_LOGS');

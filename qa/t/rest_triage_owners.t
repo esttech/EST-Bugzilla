@@ -26,7 +26,7 @@ my $t = Test::Mojo->new();
 $t->get_ok(
   $url . 'rest/bmo/triage_owners' => {'X-Bugzilla-API-Key' => $admin_user_api_key})
   ->status_is(200)
-  ->json_is('/Firefox/General/triage_owner', 'admin@mozilla.bugs')
+  ->json_is('/Firefox/General/triage_owner', 'kraken@est.tech')
   ->json_is('/Firefox/Installer/triage_owner', 'nobody@mozilla.org');
 
 my $data = $t->tx->res->json;
@@ -35,19 +35,19 @@ my $data = $t->tx->res->json;
 $t->get_ok($url
     . 'rest/bmo/triage_owners?product=Firefox&component=General' =>
     {'X-Bugzilla-API-Key' => $admin_user_api_key})->status_is(200)
-  ->json_is('/Firefox/General/triage_owner', 'admin@mozilla.bugs');
+  ->json_is('/Firefox/General/triage_owner', 'kraken@est.tech');
 
 # Get the triage owner for bugzilla.mozilla.org components
 $t->get_ok($url
     . 'rest/bmo/triage_owners?product=bugzilla.mozilla.org' =>
     {'X-Bugzilla-API-Key' => $admin_user_api_key})->status_is(200)
-  ->json_is('/bugzilla.mozilla.org/General/triage_owner', 'admin@mozilla.bugs');
+  ->json_is('/bugzilla.mozilla.org/General/triage_owner', 'kraken@est.tech');
 
-# Get the triage owner for components owned by admin@mozilla.bugs
+# Get the triage owner for components owned by kraken@est.tech
 $t->get_ok($url
-    . 'rest/bmo/triage_owners?owner=admin@mozilla.bugs' =>
+    . 'rest/bmo/triage_owners?owner=kraken@est.tech' =>
     {'X-Bugzilla-API-Key' => $admin_user_api_key})->status_is(200)
-  ->json_is('/Firefox/General/triage_owner', 'admin@mozilla.bugs')
-  ->json_is('/bugzilla.mozilla.org/General/triage_owner', 'admin@mozilla.bugs');
+  ->json_is('/Firefox/General/triage_owner', 'kraken@est.tech')
+  ->json_is('/bugzilla.mozilla.org/General/triage_owner', 'kraken@est.tech');
 
 done_testing();
