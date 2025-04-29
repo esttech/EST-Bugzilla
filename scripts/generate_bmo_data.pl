@@ -84,15 +84,10 @@ foreach my $pref (keys %user_prefs) {
 ############################################################
 
 my @priorities = qw(
-  P1
-  P2
-  P3
-  P4
-  P5
-  --
+  Priority1
 );
 
-if (!$dbh->selectrow_array("SELECT 1 FROM priority WHERE value = 'P1'")) {
+if (!$dbh->selectrow_array("SELECT 1 FROM priority WHERE value = 'Priority1'")) {
   $dbh->do("DELETE FROM priority");
   my $count = 1;
   foreach my $priority (@priorities) {
@@ -103,15 +98,16 @@ if (!$dbh->selectrow_array("SELECT 1 FROM priority WHERE value = 'P1'")) {
 }
 
 my @platforms = qw(
-  All
-  ARM
-  x86
-  x86_64
-  Unspecified
+  RCS G5
+  RCS G4
+  RCS G3
+  RCS Common
+  RCS G2
+  General
   Other
 );
 
-if (!$dbh->selectrow_array("SELECT 1 FROM rep_platform WHERE value = 'ARM'")) {
+if (!$dbh->selectrow_array("SELECT 1 FROM rep_platform WHERE value = 'RCS G5'")) {
   $dbh->do("DELETE FROM rep_platform");
   my $count = 100;
   foreach my $platform (@platforms) {
@@ -156,14 +152,13 @@ if (!$dbh->selectrow_array("SELECT 1 FROM op_sys WHERE value = 'AIX'")) {
 }
 
 my @severities = qw(
-  S1
-  S2
-  S3
-  S4
-  N/A
+  Severe
+  High
+  Medium
+  Low
 );
 
-if (!$dbh->selectrow_array("SELECT 1 FROM bug_severity WHERE value = 'S1'")) {
+if (!$dbh->selectrow_array("SELECT 1 FROM bug_severity WHERE value = 'Severe'")) {
   my $count = 1;
   foreach my $severity (@severities) {
     $dbh->do("INSERT INTO bug_severity (value, sortkey) VALUES (?, ?)",
@@ -250,35 +245,38 @@ my @products = (
       ['34 Branch', '35 Branch', '36 Branch', '37 Branch', 'Trunk', 'unspecified'],
     default_version  => 'unspecified',
     milestones => [
-      'ELIN 36',
       '---',
-      'ELIN 37',
-      'ELIN 38',
-      'ELIN 39',
-      '111 Branch',
-      'Future'
     ],
     defaultmilestone => '---',
     components       => [{
-      name        => 'General',
-      description => 'For bugs in ELIN which do not fit into '
-        . 'other more specific ELIN components',
-      initialowner   => 'nobody@mozilla.org',
+      name        => 'KernelSpace',
+      description => 'For bugs in ELIN Kernel space',
+      initialowner   => 'michael.cullen@est.tech',
       initialqaowner => '',
       initial_cc     => [],
-      watch_user     => 'general@firefox.bugs',
-      team_name      => 'Mozilla',
+      watch_user     => '',
+      team_name      => '',
       triage_owner   => 'kraken@est.tech',
     },
     {
-      name        => 'Installer',
-      description => 'Bugs and feature requests for the ELIN install .',
-      initialowner   => 'nobody@mozilla.org',
+      name        => 'UserSpace',
+      description => 'For bugs in ELIN user space',
+      initialowner   => 'michael.cullen@est.tech',
       initialqaowner => '',
       initial_cc     => [],
-      watch_user     => 'general@firefox.bugs',
-      team_name      => 'Mozilla',
-      triage_owner   => 'nobody@mozilla.org',
+      watch_user     => '',
+      team_name      => '',
+      triage_owner   => 'kraken@est.tech',
+    },
+    {
+      name        => 'ELINInfra',
+      description => 'For bugs in ELIN infra',
+      initialowner   => 'michael.cullen@est.tech',
+      initialqaowner => '',
+      initial_cc     => [],
+      watch_user     => '',
+      team_name      => '',
+      triage_owner   => 'kraken@est.tech',
     }],
   },
 );
@@ -334,7 +332,7 @@ for my $product (@products) {
         initialowner     => $component->{initialowner},
         initialqacontact => $component->{initialqacontact} || '',
         initial_cc       => $component->{initial_cc} || [],
-        team_name        => 'Mozilla',
+        team_name        => '',
         triage_owner_id  => $component->{triage_owner} || '',
       });
     }
@@ -366,27 +364,6 @@ my @groups = (
     all_products => 1,
   },
   {
-    name         => 'core-security-release',
-    description  => 'Release-track Client Security Bug',
-    no_admin     => 1,
-    bug_group    => 1,
-    all_products => 1,
-  },
-  {
-    name         => 'core-security-release',
-    description  => 'Release-track Client Security Bug',
-    no_admin     => 1,
-    bug_group    => 1,
-    all_products => 1,
-  },
-  {
-    name         => 'core-security-release',
-    description  => 'Release-track Client Security Bug',
-    no_admin     => 1,
-    bug_group    => 1,
-    all_products => 1,
-  },
-  {
     name => 'can_restrict_comments',
     description =>
       'Members of this group will be able to restrict comments on bugs',
@@ -400,29 +377,6 @@ my @groups = (
     no_admin     => 1,
     all_products => 0,
     bug_group    => 0,
-  },
-  {
-    name => 'partner-confidential',
-    description =>
-      'Restrict the visibility of this bug to the assignee, QA contact, and CC list only.',
-    no_admin     => 1,
-    all_products => 0,
-    bug_group    => 1,
-  },
-  {
-    name => 'partner-confidential-visible',
-    description =>
-      'Members of this group will be able to use the partner-confidential group when filing bugs',
-    no_admin     => 0,
-    all_products => 0,
-    bug_group    => 0,
-  },
-  {
-    name => 'mozilla-employee-confidential',
-    description  => 'mozilla-employee-confidential Description',
-    no_admin     => 0,
-    all_products => 0,
-    bug_group    => 1,
   },
   {
     name => 'can_triage_bugs',
@@ -693,61 +647,69 @@ foreach my $flag (@flagtypes) {
 my @statuses = (
   {
     value       => undef,
-    transitions => [['UNCONFIRMED', 0], ['NEW', 0], ['ASSIGNED', 0]],
-  },
-  {
-    value       => 'UNCONFIRMED',
-    sortkey     => 100,
-    isactive    => 1,
-    isopen      => 1,
-    transitions => [['NEW', 0], ['ASSIGNED', 0], ['RESOLVED', 0]],
+    transitions => [['NEW', 0]],
   },
   {
     value       => 'NEW',
+    sortkey     => 100,
+    isactive    => 1,
+    isopen      => 1,
+    transitions => [['INPROGRESS', 0], ['WAITINGANSWER', 0], ['CANCELLED', 0], ['ONHOLD', 0]],
+  },
+  {
+    value       => 'INPROGRESS',
     sortkey     => 200,
     isactive    => 1,
     isopen      => 1,
-    transitions => [['UNCONFIRMED', 0], ['ASSIGNED', 0], ['RESOLVED', 0]],
+    transitions => [['WAITINGANSWER', 0], ['CANCELLED', 0], ['ONHOLD', 0], ['RESOLVED', 0], ['IMPLEMENTED', 0], ['ONHOLD', 0], ['VERIFIED', 0]],
   },
   {
-    value       => 'ASSIGNED',
-    sortkey     => 300,
-    isactive    => 1,
-    isopen      => 1,
-    transitions => [['UNCONFIRMED', 0], ['NEW', 0], ['RESOLVED', 0]],
-  },
-  {
-    value    => 'REOPENED',
-    sortkey  => 400,
+    value    => 'WAITINGANSWER',
+    sortkey  => 300,
     isactive => 1,
     isopen   => 1,
     transitions =>
-      [['UNCONFIRMED', 0], ['NEW', 0], ['ASSIGNED', 0], ['RESOLVED', 0]],
+      [['INPROGRESS', 0], ['CANCELLED', 0], ['ONHOLD', 0], ['RESOLVED', 0], ['IMPLEMENTED', 0], ['VERIFIED', 0]],
+  },  
+  {
+    value    => 'CANCELLED',
+    sortkey  => 400,
+    isactive => 1,
+    isopen   => 0,
+    transitions =>
+      [['INPROGRESS', 0]],
   },
   {
     value       => 'RESOLVED',
     sortkey     => 500,
     isactive    => 1,
     isopen      => 0,
-    transitions => [['UNCONFIRMED', 0], ['REOPENED', 0], ['VERIFIED', 0]],
+    transitions => [['INPROGRESS', 0]],
+  },
+  {
+    value       => 'IMPLEMENTED',
+    sortkey     => 600,
+    isactive    => 1,
+    isopen      => 1,
+    transitions => [['INPROGRESS', 0], ['VERIFIED', 0], ['RESOLVED', 0], ['ONHOLD', 0]],
   },
   {
     value       => 'VERIFIED',
-    sortkey     => 600,
-    isactive    => 1,
-    isopen      => 0,
-    transitions => [['UNCONFIRMED', 0], ['REOPENED', 0], ['RESOLVED', 0]],
-  },
-  {
-    value       => 'CLOSED',
     sortkey     => 700,
     isactive    => 1,
-    isopen      => 0,
-    transitions => [['UNCONFIRMED', 0], ['REOPENED', 0], ['RESOLVED', 0]],
+    isopen      => 1,
+    transitions => [['RESOLVED', 0], ['INPROGRESS', 0], ['CANCELLED', 0], ['ONHOLD', 0]],
   },
+  {
+    value       => 'ONHOLD',
+    sortkey     => 800,
+    isactive    => 1,
+    isopen      => 1,
+    transitions => [['RESOLVED', 0], ['INPROGRESS', 0], ['CANCELLED', 0]],
+  },  
 );
 
-if (!$dbh->selectrow_array("SELECT 1 FROM bug_status WHERE value = 'ASSIGNED'"))
+if (!$dbh->selectrow_array("SELECT 1 FROM bug_status WHERE value = 'NEW'"))
 {
   $dbh->do('DELETE FROM bug_status');
   $dbh->do('DELETE FROM status_workflow');
@@ -873,7 +835,7 @@ print "creating tracking flags...\n";
 my @tracking_flags = (
   {
     name        => 'cf_status_ELIN',
-    description => 'status-felin',
+    description => 'status-elin',
     sortkey     => 0,
     type        => 'tracking',
     enter_bug   => 1,
