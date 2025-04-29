@@ -251,7 +251,7 @@ my @products = (
     components       => [{
       name        => 'KernelSpace',
       description => 'For bugs in ELIN Kernel space',
-      initialowner   => 'michael.cullen@est.tech',
+      initialowner   => 'kraken@est.tech',
       initialqaowner => '',
       initial_cc     => [],
       watch_user     => '',
@@ -261,7 +261,7 @@ my @products = (
     {
       name        => 'UserSpace',
       description => 'For bugs in ELIN user space',
-      initialowner   => 'michael.cullen@est.tech',
+      initialowner   => 'kraken@est.tech',
       initialqaowner => '',
       initial_cc     => [],
       watch_user     => '',
@@ -271,7 +271,7 @@ my @products = (
     {
       name        => 'ELINInfra',
       description => 'For bugs in ELIN infra',
-      initialowner   => 'michael.cullen@est.tech',
+      initialowner   => 'kraken@est.tech',
       initialqaowner => '',
       initial_cc     => [],
       watch_user     => '',
