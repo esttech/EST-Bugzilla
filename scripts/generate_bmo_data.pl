@@ -85,6 +85,7 @@ foreach my $pref (keys %user_prefs) {
 
 my @priorities = qw(
   Priority1
+  --
 );
 
 if (!$dbh->selectrow_array("SELECT 1 FROM priority WHERE value = 'Priority1'")) {
@@ -117,29 +118,7 @@ if (!$dbh->selectrow_array("SELECT 1 FROM rep_platform WHERE value = 'RCS_G5'"))
 }
 
 my @oses = (
-  'All',
-  'Windows',
-  'Windows XP',
-  'Windows Server 2008',
-  'Windows Vista',
-  'Windows 7',
-  'Windows 8',
-  'Windows 8.1',
-  'Windows 10',
-  'Windows 11',
-  'Windows Phone',
-  'macOS',
   'Linux',
-  'Android',
-  'iOS',
-  'iOS 7',
-  'iOS 8',
-  'BSDI',
-  'FreeBSD',
-  'NetBSD',
-  'OpenBSD',
-  'Unspecified',
-  'Other',
 );
 
 if (!$dbh->selectrow_array("SELECT 1 FROM op_sys WHERE value = 'AIX'")) {
@@ -569,30 +548,6 @@ my @flagtypes = (
     cc_list          => '',
     inclusions       => ['']
   },
-  {
-    name => 'feedback',
-    desc => 'A particular person\'s input is requested for a patch, '
-      . 'but that input does not amount to an official review.',
-    is_requestable   => 1,
-    is_requesteeble  => 1,
-    is_multiplicable => 1,
-    grant_group      => '',
-    target_type      => 'a',
-    cc_list          => '',
-    inclusions       => ['']
-  },
-  {
-    name => 'qe-verify',
-    desc => 'qe-verify: + ➜ request to verify the bug manually
-qe-verify: - ➜ the bug will not/can not be verified manually',
-    is_requestable   => 0,
-    is_requesteeble  => 0,
-    is_multiplicable => 0,
-    grant_group      => '',
-    target_type      => 'b',
-    cc_list          => '',
-    inclusions       => ['']
-  },
 );
 
 print "creating flag types...\n";
@@ -756,15 +711,8 @@ if (!$dbh->selectrow_array("SELECT 1 FROM bug_status WHERE value = 'NEW'"))
 
 my @resolutions = (
   {value => '',           sortkey => 100,  isactive => 1,},
-  {value => 'FIXED',      sortkey => 200,  isactive => 1,},
-  {value => 'INVALID',    sortkey => 300,  isactive => 1,},
-  {value => 'WONTFIX',    sortkey => 400,  isactive => 1,},
-  {value => 'DUPLICATE',  sortkey => 700,  isactive => 1,},
-  {value => 'WORKSFORME', sortkey => 800,  isactive => 1,},
-  {value => 'EXPIRED',    sortkey => 900,  isactive => 1,},
-  {value => 'MOVED',      sortkey => 1000, isactive => 0,},
-  {value => 'INCOMPLETE', sortkey => 850,  isactive => 1,},
-  {value => 'SUPPORT',    sortkey => 875,  isactive => 0,},
+  {value => 'RESOLVED',      sortkey => 200,  isactive => 1,},
+  {value => 'CANCELLED',    sortkey => 300,  isactive => 1,},
 );
 
 if (!$dbh->selectrow_array(
@@ -788,37 +736,6 @@ my @keywords = (
     name        => 'regression',
     description => 'The problem was fixed, but then it came back (regressed) '
       . 'and this new bug was filed to track the regression.'
-  },
-  {
-    name        => 'relnote',
-    description => 'This bug need to be put on release notes for next '
-      . 'milestone announcement.'
-  },
-  {
-    name        => 'crash',
-    description => 'A Critical Severity bug which causes a crash.'
-  },
-  {
-    name        => 'triaged',
-    description => 'Bugs that have been triaged.'
-  },
-  {
-    name        => 'leave-open',
-    description => 'Instructs merge tools to leave the bug open when the patches are merged to mozilla-central.',
-  },
-  {
-    name        => 'checkin-needed-tb',
-    description => 'Keyword searched on by the Thunderbird team to use to have your patch checked in, if you cant check it in yourself.'
-  },
-  {
-    name        => 'sec-critical',
-    description => 'Exploitable vulnerabilities which can lead to the widespread compromise of many users.',
-  },
-  {
-    name        => 'sec-high',
-    description => 'Obtain confidential data from other sites the user is visiting or the local machine, or '
-    . 'inject data or code into those sites, requiring no more than normal browsing actions. Exploitable web '
-    . 'vulnerabilities that can lead to the targeted compromise of a small number of users.',
   },
 );
 
