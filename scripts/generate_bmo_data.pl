@@ -662,7 +662,15 @@ my @statuses = (
     isactive    => 1,
     isopen      => 1,
     transitions => [['RESOLVED', 0], ['INPROGRESS', 0], ['CANCELLED', 0]],
+  },
+  {
+    value       => 'UNCONFIRMED',
+    sortkey     => 900,
+    isactive    => 1,
+    isopen      => 1,
+    transitions => [['NEW', 0]],
   },  
+    
 );
 
 if (!$dbh->selectrow_array("SELECT 1 FROM bug_status WHERE value = 'NEW'"))
