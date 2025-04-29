@@ -98,16 +98,16 @@ if (!$dbh->selectrow_array("SELECT 1 FROM priority WHERE value = 'Priority1'")) 
 }
 
 my @platforms = qw(
-  RCS G5
-  RCS G4
-  RCS G3
-  RCS Common
-  RCS G2
+  RCS_G5
+  RCS_G4
+  RCS_G3
+  RCS_Common
+  RCS_G2
   General
   Other
 );
 
-if (!$dbh->selectrow_array("SELECT 1 FROM rep_platform WHERE value = 'RCS G5'")) {
+if (!$dbh->selectrow_array("SELECT 1 FROM rep_platform WHERE value = 'RCS_G5'")) {
   $dbh->do("DELETE FROM rep_platform");
   my $count = 100;
   foreach my $platform (@platforms) {
