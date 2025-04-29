@@ -318,6 +318,8 @@ for my $product (@products) {
     delete Bugzilla->user->{selectable_products};
 
     foreach my $component (@{$product->{components}}) {
+      print "creating product...\n";
+
       if (!Bugzilla::User->new({name => $component->{watch_user}})) {
         Bugzilla::User->create({
           login_name => $component->{watch_user}, cryptpassword => '*',
@@ -331,7 +333,7 @@ for my $product (@products) {
         initialowner     => $component->{initialowner},
         initialqacontact => $component->{initialqacontact} || '',
         initial_cc       => $component->{initial_cc} || [],
-        team_name        => '',
+        team_name        => 'ELIN',
         triage_owner_id  => $component->{triage_owner} || '',
       });
     }
