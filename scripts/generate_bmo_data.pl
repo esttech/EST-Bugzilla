@@ -118,6 +118,7 @@ if (!$dbh->selectrow_array("SELECT 1 FROM rep_platform WHERE value = 'RCS_G5'"))
 }
 
 my @oses = (
+  'All',
   'Linux',
 );
 
@@ -673,7 +674,7 @@ my @statuses = (
     
 );
 
-if (!$dbh->selectrow_array("SELECT 1 FROM bug_status WHERE value = 'NEW'"))
+if (!$dbh->selectrow_array("SELECT 1 FROM bug_status WHERE value = 'WAITINGANSWER'"))
 {
   $dbh->do('DELETE FROM bug_status');
   $dbh->do('DELETE FROM status_workflow');
