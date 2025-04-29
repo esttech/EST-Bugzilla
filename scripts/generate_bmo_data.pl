@@ -254,7 +254,7 @@ my @products = (
       initialqaowner => '',
       initial_cc     => [],
       watch_user     => 'nobody@mozilla.org',
-      team_name      => 'ELIN',
+      team_name      => 'Mozilla',
       triage_owner   => 'nobody@mozilla.org',
     },
     {
@@ -264,7 +264,7 @@ my @products = (
       initialqaowner => '',
       initial_cc     => [],
       watch_user     => 'nobody@mozilla.org',
-      team_name      => 'ELIN',
+      team_name      => 'Mozilla',
       triage_owner   => 'nobody@mozilla.org',
     },
     {
@@ -274,7 +274,7 @@ my @products = (
       initialqaowner => '',
       initial_cc     => [],
       watch_user     => 'nobody@mozilla.org',
-      team_name      => 'ELIN',
+      team_name      => 'Mozilla',
       triage_owner   => 'nobody@mozilla.org',
     }],
   },
