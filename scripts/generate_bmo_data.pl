@@ -238,11 +238,10 @@ my @products = (
     classification => 'ELIN Software',
     product_name   => 'ELIN',
     description    => 'For bugs in ELIN '
-      . ', which will never happen '
       . 'here or in the <a href="https://www.est.tech">EST</a> product.'
       . '(<a href="https://www.est.tech">more info</a>)',
     versions =>
-      ['34 Branch', '35 Branch', '36 Branch', '37 Branch', 'Trunk', 'unspecified'],
+      ['unspecified'],
     default_version  => 'unspecified',
     milestones => [
       '---',
@@ -251,32 +250,32 @@ my @products = (
     components       => [{
       name        => 'KernelSpace',
       description => 'For bugs in ELIN Kernel space',
-      initialowner   => 'kraken@est.tech',
+      initialowner   => 'nobody@mozilla.org',
       initialqaowner => '',
       initial_cc     => [],
       watch_user     => '',
       team_name      => '',
-      triage_owner   => 'kraken@est.tech',
+      triage_owner   => 'nobody@mozilla.org',
     },
     {
       name        => 'UserSpace',
       description => 'For bugs in ELIN user space',
-      initialowner   => 'kraken@est.tech',
+      initialowner   => 'nobody@mozilla.org',
       initialqaowner => '',
       initial_cc     => [],
       watch_user     => '',
       team_name      => '',
-      triage_owner   => 'kraken@est.tech',
+      triage_owner   => 'nobody@mozilla.org',
     },
     {
       name        => 'ELINInfra',
       description => 'For bugs in ELIN infra',
-      initialowner   => 'kraken@est.tech',
+      initialowner   => 'nobody@mozilla.org',
       initialqaowner => '',
       initial_cc     => [],
       watch_user     => '',
       team_name      => '',
-      triage_owner   => 'kraken@est.tech',
+      triage_owner   => 'nobody@mozilla.org',
     }],
   },
 );
