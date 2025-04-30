@@ -33,21 +33,21 @@ use Bugzilla::Version;
 use Try::Tiny;
 
 use constant STATUS_WORKFLOW => (
-#  [undef,         'UNCONFIRMED'],
-#  [undef,         'CONFIRMED'],
-#  [undef,         'IN_PROGRESS'],
-#  ['UNCONFIRMED', 'CONFIRMED'],
-#  ['UNCONFIRMED', 'IN_PROGRESS'],
-#  ['UNCONFIRMED', 'RESOLVED'],
-#  ['CONFIRMED',   'IN_PROGRESS'],
-#  ['CONFIRMED',   'RESOLVED'],
-#  ['IN_PROGRESS', 'CONFIRMED'],
-#  ['IN_PROGRESS', 'RESOLVED'],
-#  ['RESOLVED',    'UNCONFIRMED'],
-#  ['RESOLVED',    'CONFIRMED'],
-#  ['RESOLVED',    'VERIFIED'],
-#  ['VERIFIED',    'UNCONFIRMED'],
-#  ['VERIFIED',    'CONFIRMED'],
+  [undef,         'UNCONFIRMED'],
+  [undef,         'CONFIRMED'],
+  [undef,         'IN_PROGRESS'],
+  ['UNCONFIRMED', 'CONFIRMED'],
+  ['UNCONFIRMED', 'IN_PROGRESS'],
+  ['UNCONFIRMED', 'RESOLVED'],
+  ['CONFIRMED',   'IN_PROGRESS'],
+  ['CONFIRMED',   'RESOLVED'],
+  ['IN_PROGRESS', 'CONFIRMED'],
+  ['IN_PROGRESS', 'RESOLVED'],
+  ['RESOLVED',    'UNCONFIRMED'],
+  ['RESOLVED',    'CONFIRMED'],
+  ['RESOLVED',    'VERIFIED'],
+  ['VERIFIED',    'UNCONFIRMED'],
+  ['VERIFIED',    'CONFIRMED'],
 );
 
 sub SETTINGS {

@@ -65,17 +65,17 @@ use Bugzilla::Extension::BMO::FakeBug;
 use Bugzilla::Extension::BMO::Data;
 
 use constant PRODUCT_CHANNELS => {
-  'firefox' => {
-    'nightly' => {label => 'Nightly', json_key => 'FIREFOX_NIGHTLY'},
-    'beta'    => {label => 'Beta',    json_key => 'LATEST_FIREFOX_DEVEL_VERSION'},
-    'release' => {label => 'Release', json_key => 'LATEST_FIREFOX_VERSION'},
-    'esr'     => {label => 'ESR',     json_key => 'FIREFOX_ESR'},
-  },
-  'thunderbird' => {
-    'nightly' => {label => 'Daily',   json_key => 'LATEST_THUNDERBIRD_NIGHTLY_VERSION'},
-    'beta'    => {label => 'Beta',    json_key => 'LATEST_THUNDERBIRD_DEVEL_VERSION'},
-    'release' => {label => 'Release', json_key => 'LATEST_THUNDERBIRD_VERSION'},
-  },
+#  'firefox' => {
+#    'nightly' => {label => 'Nightly', json_key => 'FIREFOX_NIGHTLY'},
+#    'beta'    => {label => 'Beta',    json_key => 'LATEST_FIREFOX_DEVEL_VERSION'},
+#    'release' => {label => 'Release', json_key => 'LATEST_FIREFOX_VERSION'},
+#    'esr'     => {label => 'ESR',     json_key => 'FIREFOX_ESR'},
+#  },
+#  'thunderbird' => {
+#    'nightly' => {label => 'Daily',   json_key => 'LATEST_THUNDERBIRD_NIGHTLY_VERSION'},
+#    'beta'    => {label => 'Beta',    json_key => 'LATEST_THUNDERBIRD_DEVEL_VERSION'},
+#    'release' => {label => 'Release', json_key => 'LATEST_THUNDERBIRD_VERSION'},
+#  },
 };
 
 our $VERSION = '0.1';
