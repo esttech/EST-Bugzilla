@@ -292,7 +292,7 @@ unless ($switch{'no-database'}) {
   # Create default Product
   ###########################################################################
 
-  Bugzilla::Install::create_default_product();
+  # Bugzilla::Install::create_default_product();
 
   Bugzilla::Hook::process('install_before_final_checks', {silent => $silent});
 

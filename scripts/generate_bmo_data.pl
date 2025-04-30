@@ -106,6 +106,7 @@ my @platforms = qw(
   RCS_G2
   General
   Other
+  All
 );
 
 if (!$dbh->selectrow_array("SELECT 1 FROM rep_platform WHERE value = 'RCS_G5'")) {

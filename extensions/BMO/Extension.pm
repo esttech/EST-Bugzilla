@@ -1561,6 +1561,8 @@ sub install_update_db {
 
   # Add pronouns for Firefox/Thunderbird Status/Tracking Flags such as
   # cf_tracking_firefox_nightly
+  warn "Trying to add origniator before loop.\n";
+
   foreach my $type ('status', 'tracking') {
     foreach my $product (keys %{PRODUCT_CHANNELS()}) {
       foreach my $channel (keys %{PRODUCT_CHANNELS->{$product}}) {
@@ -1579,11 +1581,18 @@ sub install_update_db {
       }
     }
   }
+  warn "Trying to add origniator.\n";
   # Add triaged field to expose it as a field for search.
   if (!Bugzilla::Field->new({name => 'Originator'})) {
+    warn "Adding origniator.\n";
     Bugzilla::Field->create({
       name        => 'Originator',
       description => 'Originator',
+      buglist     => 1,
+      custom      => 1,
+      enter_bug   => 0,
+      obsolete    => 0,
+      mailhead    => 0,      
       type        => FIELD_TYPE_FREETEXT,
     });
   }
