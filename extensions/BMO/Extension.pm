@@ -1593,8 +1593,7 @@ sub install_update_db {
       enter_bug   => 0,
       obsolete    => 0,
       mailhead    => 0,      
-      type        => FIELD_TYPE_SINGLE_SELECT,
-      values      => ["aaaa","bbbb"]
+      type        => FIELD_TYPE_FREETEXT      
     });
   }
 
