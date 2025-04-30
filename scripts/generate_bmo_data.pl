@@ -611,14 +611,14 @@ my @statuses = (
     sortkey     => 100,
     isactive    => 1,
     isopen      => 1,
-    transitions => [['INPROGRESS', 0], ['WAITINGANSWER', 0], ['CANCELLED', 0], ['ONHOLD', 0]],
+    transitions => [['IN_PROGRESS', 0], ['WAITINGANSWER', 0], ['CANCELLED', 0], ['ONHOLD', 0]],
   },
   {
-    value       => 'INPROGRESS',
+    value       => 'IN_PROGRESS',
     sortkey     => 200,
     isactive    => 1,
     isopen      => 1,
-    transitions => [['WAITINGANSWER', 0], ['CANCELLED', 0], ['ONHOLD', 0], ['RESOLVED', 0], ['IMPLEMENTED', 0], ['ONHOLD', 0], ['VERIFIED', 0]],
+    transitions => [['WAITINGANSWER', 0], ['CANCELLED', 0], ['ONHOLD', 0], ['RESOLVED', 0], ['IMPLEMENTED', 0],  ['VERIFIED', 0]],
   },
   {
     value    => 'WAITINGANSWER',
@@ -626,7 +626,7 @@ my @statuses = (
     isactive => 1,
     isopen   => 1,
     transitions =>
-      [['INPROGRESS', 0], ['CANCELLED', 0], ['ONHOLD', 0], ['RESOLVED', 0], ['IMPLEMENTED', 0], ['VERIFIED', 0]],
+      [['IN_PROGRESS', 0], ['CANCELLED', 0], ['ONHOLD', 0], ['RESOLVED', 0], ['IMPLEMENTED', 0], ['VERIFIED', 0]],
   },  
   {
     value    => 'CANCELLED',
@@ -634,44 +634,29 @@ my @statuses = (
     isactive => 1,
     isopen   => 0,
     transitions =>
-      [['INPROGRESS', 0]],
-  },
-  {
-    value       => 'RESOLVED',
-    sortkey     => 500,
-    isactive    => 1,
-    isopen      => 0,
-    transitions => [['INPROGRESS', 0]],
+      [['IN_PROGRESS', 0]],
   },
   {
     value       => 'IMPLEMENTED',
     sortkey     => 600,
     isactive    => 1,
     isopen      => 1,
-    transitions => [['INPROGRESS', 0], ['VERIFIED', 0], ['RESOLVED', 0], ['ONHOLD', 0]],
+    transitions => [['IN_PROGRESS', 0], ['VERIFIED', 0], ['RESOLVED', 0], ['ONHOLD', 0]],
   },
   {
     value       => 'VERIFIED',
     sortkey     => 700,
     isactive    => 1,
     isopen      => 1,
-    transitions => [['RESOLVED', 0], ['INPROGRESS', 0], ['CANCELLED', 0], ['ONHOLD', 0]],
+    transitions => [['RESOLVED', 0], ['IN_PROGRESS', 0], ['CANCELLED', 0], ['ONHOLD', 0]],
   },
   {
     value       => 'ONHOLD',
     sortkey     => 800,
     isactive    => 1,
     isopen      => 1,
-    transitions => [['RESOLVED', 0], ['INPROGRESS', 0], ['CANCELLED', 0]],
+    transitions => [['RESOLVED', 0], ['IN_PROGRESS', 0], ['CANCELLED', 0]],
   },
-  {
-    value       => 'UNCONFIRMED',
-    sortkey     => 900,
-    isactive    => 1,
-    isopen      => 1,
-    transitions => [['NEW', 0]],
-  },  
-    
 );
 
 if (!$dbh->selectrow_array("SELECT 1 FROM bug_status WHERE value = 'WAITINGANSWER'"))

@@ -98,8 +98,8 @@ use constant ENUM_DEFAULTS => {
   op_sys       => ["Linux", "Other"],
   rep_platform => [ "Other"],
   bug_status =>
-    ["NEW"],
-  resolution => [""],
+    ["UNCONFIRMED", "CONFIRMED", "IN_PROGRESS", "RESOLVED", "VERIFIED","NEW","WAITINGANSWER","CANCELLED","IMPLEMENTED","VERIFIED","ONHOLD"],
+  resolution => ["", "FIXED", "INVALID", "WONTFIX", "DUPLICATE", "WORKSFORME"],
 };
 
 # The character that means "OR" in a boolean fulltext search. If empty,
