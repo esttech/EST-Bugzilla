@@ -1579,6 +1579,14 @@ sub install_update_db {
       }
     }
   }
+  # Add triaged field to expose it as a field for search.
+  if (!Bugzilla::Field->new({name => 'Originator'})) {
+    Bugzilla::Field->create({
+      name        => 'Originator',
+      description => 'Originator',
+      type        => FIELD_TYPE_FREETEXT,
+    });
+  }
 
   # Add triaged field to expose it as a field for search.
   if (!Bugzilla::Field->new({name => 'is_triaged'})) {

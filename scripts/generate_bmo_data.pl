@@ -161,6 +161,11 @@ my @users = (
     realname => 'Nobody; OK to take it and work on it',
     password => '*'
   },
+  {
+    login    => 'bugzilla@est.tech',
+    realname => 'Bugzilla; A dummy id',
+    password => '*'
+  },  
 
   map { {login => $_, realname => (split(/@/, $_, 2))[0], password => '*',} }
     map {
@@ -230,32 +235,32 @@ my @products = (
     components       => [{
       name        => 'KernelSpace',
       description => 'For bugs in ELIN Kernel space',
-      initialowner   => 'nobody@mozilla.org',
+      initialowner   => 'bugzilla@est.tech',
       initialqaowner => '',
       initial_cc     => [],
-      watch_user     => 'nobody@mozilla.org',
-      team_name      => 'Mozilla',
-      triage_owner   => 'nobody@mozilla.org',
+      watch_user     => 'bugzilla@est.tech',
+      team_name      => 'ELIN',
+      triage_owner   => 'bugzilla@est.tech',
     },
     {
       name        => 'UserSpace',
       description => 'For bugs in ELIN user space',
-      initialowner   => 'nobody@mozilla.org',
+      initialowner   => 'bugzilla@est.tech',
       initialqaowner => '',
       initial_cc     => [],
-      watch_user     => 'nobody@mozilla.org',
-      team_name      => 'Mozilla',
-      triage_owner   => 'nobody@mozilla.org',
+      watch_user     => 'bugzilla@est.tech',
+      team_name      => 'ELIN',
+      triage_owner   => 'bugzilla@est.tech',
     },
     {
       name        => 'ELINInfra',
       description => 'For bugs in ELIN infra',
-      initialowner   => 'nobody@mozilla.org',
+      initialowner   => 'bugzilla@est.tech',
       initialqaowner => '',
       initial_cc     => [],
-      watch_user     => 'nobody@mozilla.org',
-      team_name      => 'Mozilla',
-      triage_owner   => 'nobody@mozilla.org',
+      watch_user     => 'bugzilla@est.tech',
+      team_name      => 'ELIN',
+      triage_owner   => 'bugzilla@est.tech',
     }],
   },
 );
@@ -611,22 +616,22 @@ my @statuses = (
     sortkey     => 100,
     isactive    => 1,
     isopen      => 1,
-    transitions => [['IN_PROGRESS', 0], ['WAITINGANSWER', 0], ['CANCELLED', 0], ['ONHOLD', 0]],
+    transitions => [['IN_PROGRESS', 0], ['WAITING', 0], ['CANCELLED', 0], ['ONHOLD', 0]],
   },
   {
     value       => 'IN_PROGRESS',
     sortkey     => 200,
     isactive    => 1,
     isopen      => 1,
-    transitions => [['WAITINGANSWER', 0], ['CANCELLED', 0], ['ONHOLD', 0], ['RESOLVED', 0], ['IMPLEMENTED', 0],  ['VERIFIED', 0]],
+    transitions => [['WAITING', 0], ['CANCELLED', 0], ['ONHOLD', 0], ['IMPLEMENTED', 0]],
   },
   {
-    value    => 'WAITINGANSWER',
+    value    => 'WAITING',
     sortkey  => 300,
     isactive => 1,
     isopen   => 1,
     transitions =>
-      [['IN_PROGRESS', 0], ['CANCELLED', 0], ['ONHOLD', 0], ['RESOLVED', 0], ['IMPLEMENTED', 0], ['VERIFIED', 0]],
+      [['IN_PROGRESS', 0], ['CANCELLED', 0], ['ONHOLD', 0]],
   },  
   {
     value    => 'CANCELLED',
@@ -634,28 +639,28 @@ my @statuses = (
     isactive => 1,
     isopen   => 0,
     transitions =>
-      [['IN_PROGRESS', 0]],
+      [],
   },
   {
     value       => 'IMPLEMENTED',
     sortkey     => 600,
     isactive    => 1,
     isopen      => 1,
-    transitions => [['IN_PROGRESS', 0], ['VERIFIED', 0], ['RESOLVED', 0], ['ONHOLD', 0]],
+    transitions => [ ['VERIFIED', 0], ['CANCELLED', 0]],
   },
   {
     value       => 'VERIFIED',
     sortkey     => 700,
     isactive    => 1,
     isopen      => 1,
-    transitions => [['RESOLVED', 0], ['IN_PROGRESS', 0], ['CANCELLED', 0], ['ONHOLD', 0]],
+    transitions => [['RESOLVED', 0],  ['CANCELLED', 0]],
   },
   {
     value       => 'ONHOLD',
     sortkey     => 800,
     isactive    => 1,
     isopen      => 1,
-    transitions => [['RESOLVED', 0], ['IN_PROGRESS', 0], ['CANCELLED', 0]],
+    transitions => [['WAITING', 0], ['IN_PROGRESS', 0], ['CANCELLED', 0]],
   }, 
   {
     value       => 'UNCONFIRMED',
@@ -669,7 +674,7 @@ my @statuses = (
     sortkey     => 1000,
     isactive    => 1,
     isopen      => 1,
-    transitions => [['NEW', 0]],
+    transitions => [],
   },      
 );
 
