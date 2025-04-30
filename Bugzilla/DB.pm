@@ -98,7 +98,7 @@ use constant ENUM_DEFAULTS => {
   op_sys       => ["Linux", "Other"],
   rep_platform => [ "Other"],
   bug_status =>
-    ["UNCONFIRMED", "CONFIRMED", "IN_PROGRESS", "RESOLVED", "VERIFIED","NEW","WAITINGANSWER","CANCELLED","IMPLEMENTED","ONHOLD"],
+    ["UNCONFIRMED", "CONFIRMED", "IN_PROGRESS", "RESOLVED", "VERIFIED"],
   resolution => ["", "FIXED", "INVALID", "WONTFIX", "DUPLICATE", "WORKSFORME"],
 };
 
