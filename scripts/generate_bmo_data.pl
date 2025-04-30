@@ -658,7 +658,7 @@ my @statuses = (
   },
 );
 
-if (!$dbh->selectrow_array("SELECT 1 FROM bug_status WHERE value = 'WAITINGANSWER'"))
+if (!$dbh->selectrow_array("SELECT 1 FROM bug_status WHERE value = 'NEW'"))
 {
   $dbh->do('DELETE FROM bug_status');
   $dbh->do('DELETE FROM status_workflow');
