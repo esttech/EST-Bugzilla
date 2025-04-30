@@ -118,6 +118,7 @@ if (!$dbh->selectrow_array("SELECT 1 FROM rep_platform WHERE value = 'RCS_G5'"))
 }
 
 my @oses = (
+  'All',
   'Linux',
 );
 
