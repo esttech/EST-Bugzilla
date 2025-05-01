@@ -1596,7 +1596,19 @@ sub install_update_db {
       type        => FIELD_TYPE_SINGLE_SELECT      
     });
   }
-
+  if (!Bugzilla::Field->new({name => 'FreeTextVerison'})) {
+    #warn "Adding origniator.\n";
+    Bugzilla::Field->create({
+      name        => 'FreeTextVerison',
+      description => 'Free Text Verison',
+      buglist     => 1,
+      custom      => 1,
+      enter_bug   => 0,
+      obsolete    => 0,
+      mailhead    => 0,      
+      type        => FIELD_TYPE_FREETEXT      
+    });
+  }
   # Add triaged field to expose it as a field for search.
   if (!Bugzilla::Field->new({name => 'is_triaged'})) {
     Bugzilla::Field->create({
