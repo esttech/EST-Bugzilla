@@ -1583,7 +1583,8 @@ sub install_update_db {
   }
   #warn "Trying to add origniator.\n";
   # Add triaged field to expose it as a field for search.
-  if (!Bugzilla::Field->new({name => 'Originator'})) {
+
+  if (!Bugzilla::Field->new({name => 'cf_originator'})) {
     #warn "Adding origniator.\n";
     Bugzilla::Field->create({
       name        => 'Originator',
@@ -1596,7 +1597,7 @@ sub install_update_db {
       type        => FIELD_TYPE_SINGLE_SELECT      
     });
   }
-  if (!Bugzilla::Field->new({name => 'FreeTextVerison'})) {
+  if (!Bugzilla::Field->new({name => 'cf_freetextverison'})) {
     #warn "Adding origniator.\n";
     Bugzilla::Field->create({
       name        => 'FreeTextVerison',
