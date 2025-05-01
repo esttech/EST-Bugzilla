@@ -148,6 +148,22 @@ if (!$dbh->selectrow_array("SELECT 1 FROM bug_severity WHERE value = 'Severe'"))
   }
 }
 
+my @originators = qw(
+  EST
+  XCS
+  RCS
+  Other
+);
+
+if (!$dbh->selectrow_array("SELECT 1 FROM cf_originator WHERE value = 'EST'")) {
+  my $count = 1;
+  foreach my $originator (@originators) {
+    $dbh->do("INSERT INTO cf_originator (value, sortkey) VALUES (?, ?)",
+      undef, ($originator, $count));
+    $count++;
+  }
+}
+
 ##########################################################################
 # Create Users
 ##########################################################################
