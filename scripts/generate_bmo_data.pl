@@ -84,11 +84,15 @@ foreach my $pref (keys %user_prefs) {
 ############################################################
 
 my @priorities = qw(
-  Priority1
+  P1
+  P2
+  P3
+  P4
+  P5
   --
 );
 
-if (!$dbh->selectrow_array("SELECT 1 FROM priority WHERE value = 'Priority1'")) {
+if (!$dbh->selectrow_array("SELECT 1 FROM priority WHERE value = 'P1'")) {
   $dbh->do("DELETE FROM priority");
   my $count = 1;
   foreach my $priority (@priorities) {
