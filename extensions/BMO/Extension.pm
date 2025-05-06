@@ -1601,7 +1601,7 @@ sub install_update_db {
     #warn "Adding origniator.\n";
     Bugzilla::Field->create({
       name        => 'FreeTextVerison',
-      description => 'Free Text Verison',
+      description => 'Free Text Version',
       buglist     => 1,
       custom      => 1,
       enter_bug   => 0,
