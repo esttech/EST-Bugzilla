@@ -637,14 +637,14 @@ my @statuses = (
     sortkey     => 100,
     isactive    => 1,
     isopen      => 1,
-    transitions => [['IN_PROGRESS', 0], ['CANCELLED', 0], ['IMPLEMENTED', 0], ['VERIFIED', 0], ['ONHOLD', 0], ['RESOLVED', 0]],
+    transitions => [['IN_PROGRESS', 0], ['WAITING', 0], ['CANCELLED', 0], ['IMPLEMENTED', 0], ['VERIFIED', 0], ['ONHOLD', 0], ['RESOLVED', 0]],
   },
   {
     value       => 'IN_PROGRESS',
     sortkey     => 200,
     isactive    => 1,
     isopen      => 1,
-    transitions => [['CANCELLED', 0], ['IMPLEMENTED', 0], ['VERIFIED', 0], ['ONHOLD', 0], ['RESOLVED', 0]],
+    transitions => [['CANCELLED', 0], ['WAITING', 0], ['IMPLEMENTED', 0], ['VERIFIED', 0], ['ONHOLD', 0], ['RESOLVED', 0]],
   },
   {
     value    => 'WAITING',
@@ -652,7 +652,7 @@ my @statuses = (
     isactive => 1,
     isopen   => 1,
     transitions =>
-      [],
+      [['IN_PROGRESS', 0], ['CANCELLED', 0], ['IMPLEMENTED', 0], ['VERIFIED', 0], ['ONHOLD', 0], ['RESOLVED', 0]],
   },  
   {
     value    => 'CANCELLED',
@@ -667,21 +667,21 @@ my @statuses = (
     sortkey     => 600,
     isactive    => 1,
     isopen      => 1,
-    transitions => [ ['IN_PROGRESS', 0], ['CANCELLED', 0], ['VERIFIED', 0], ['ONHOLD', 0], ['RESOLVED', 0]],
+    transitions => [ ['IN_PROGRESS', 0], ['WAITING', 0], ['CANCELLED', 0], ['VERIFIED', 0], ['ONHOLD', 0], ['RESOLVED', 0]],
   },
   {
     value       => 'VERIFIED',
     sortkey     => 700,
     isactive    => 1,
     isopen      => 1,
-    transitions => [['IN_PROGRESS', 0], ['CANCELLED', 0], ['IMPLEMENTED', 0], ['ONHOLD', 0], ['RESOLVED', 0]],
+    transitions => [['IN_PROGRESS', 0], ['WAITING', 0], ['CANCELLED', 0], ['IMPLEMENTED', 0], ['ONHOLD', 0], ['RESOLVED', 0]],
   },
   {
     value       => 'ONHOLD',
     sortkey     => 800,
     isactive    => 1,
     isopen      => 1,
-    transitions => [['IN_PROGRESS', 0], ['CANCELLED', 0], ['IMPLEMENTED', 0], ['VERIFIED', 0], ['RESOLVED', 0]],
+    transitions => [['IN_PROGRESS', 0], ['WAITING', 0], ['CANCELLED', 0], ['IMPLEMENTED', 0], ['VERIFIED', 0], ['RESOLVED', 0]],
   }, 
   {
     value       => 'UNCONFIRMED',
