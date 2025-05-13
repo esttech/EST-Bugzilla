@@ -1597,10 +1597,10 @@ sub install_update_db {
       type        => FIELD_TYPE_SINGLE_SELECT      
     });
   }
-  if (!Bugzilla::Field->new({name => 'cf_freetextverison'})) {
+  if (!Bugzilla::Field->new({name => 'cf_freetextswversion'})) {
     #warn "Adding origniator.\n";
     Bugzilla::Field->create({
-      name        => 'FreeTextVerison',
+      name        => 'FreeTextSWVersion',
       description => 'SW Version',
       buglist     => 1,
       custom      => 1,
