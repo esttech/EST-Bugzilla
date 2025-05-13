@@ -1604,7 +1604,7 @@ sub install_update_db {
       description => 'SW Version',
       buglist     => 1,
       custom      => 1,
-      enter_bug   => 0,
+      enter_bug   => 1,
       obsolete    => 0,
       mailhead    => 0,      
       type        => FIELD_TYPE_FREETEXT      
