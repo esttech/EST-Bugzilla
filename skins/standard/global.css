@@ -2982,7 +2982,7 @@ div.bz_comment_text pre {
   color: var(--bug-type-color-defect);
 }
 
-.bug-type-label[data-type="enhancement"] .icon::before {
+.bug-type-label[data-type="Feature"] .icon::before {
   content: '\E146';
   color: var(--bug-type-color-enhancement);
 }
