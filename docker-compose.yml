@@ -82,25 +82,24 @@ services:
         #- bmo.db
         #- memcached
 
-        #bmo.pushd:
-        #platform: linux/x86_64
-        #build: *bmo_build
-        #command:
-        #- perl
-        #- extensions/Push/bin/bugzilla-pushd.pl
-        #- start
-        #- "-d"
-        #- "-f"
-        #volumes:
-        #- bmo-data-dir:/app/data
-        #tmpfs:
-        #- /tmp
-        #- /run
-        #environment: *bmo_env
-        #restart: always
-        #depends_on:
-        #- bmo.db
-        #- memcached
+  bmo.pushd:
+    platform: linux/x86_64
+    build: *bmo_build
+    command:
+      - perl
+      - extensions/Push/bin/bugzilla-pushd.pl
+      - start
+      - "-d"
+      - "-f"
+    volumes:
+      - bmo-data-dir:/app/data
+    tmpfs:
+      - /tmp
+      - /run
+    environment: *bmo_env
+    restart: always
+    depends_on:
+      - bmo.db
 
   bmo.db:
     platform: linux/x86_64
