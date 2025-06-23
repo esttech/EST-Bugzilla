@@ -2966,8 +2966,11 @@ div.bz_comment_text pre {
   --bug-status-color-closed: #1B6AB8;
   --bug-status-color-untriaged: #1B9BB8;
   --bug-type-color-defect: #EA3C3D;
-  --bug-type-color-enhancement: #2ABA27;
-  --bug-type-color-task: #2886C9;
+  --bug-type-color-feature: #2ABA27;
+  --bug-type-color-question: #2886C9;
+  --bug-type-color-vulnerability: #a928c9;
+  --bug-type-color-other: #c92866;
+
 }
 
 .bug-type-label .icon {
@@ -2977,19 +2980,29 @@ div.bz_comment_text pre {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.bug-type-label[data-type="defect"] .icon::before {
+.bug-type-label[data-type="Defect"] .icon::before {
   content: '\E3AC';
   color: var(--bug-type-color-defect);
 }
 
-.bug-type-label[data-type="enhancement"] .icon::before {
+.bug-type-label[data-type="Feature"] .icon::before {
   content: '\E146';
-  color: var(--bug-type-color-enhancement);
+  color: var(--bug-type-color-feature);
 }
 
-.bug-type-label[data-type="task"] .icon::before {
-  content: '\E85D';
-  color: var(--bug-type-color-task);
+.bug-type-label[data-type="Question"] .icon::before {
+  content: '\eb8b';
+  color: var(--bug-type-color-question);
+}
+
+.bug-type-label[data-type="Vulnerability"] .icon::before {
+  content: '\e32a';
+  color: var(--bug-type-color-vulnerability);
+}
+
+.bug-type-label[data-type="Other"] .icon::before {
+  content: '\e574';
+  color: var(--bug-type-color-other);
 }
 
 .bug-type-label.iconic .icon {
